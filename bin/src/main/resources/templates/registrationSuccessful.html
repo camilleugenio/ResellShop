@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/common.html :: header(title='Registrazione')">
+</head>
+
+<body>
+	<div th:replace="fragments/common.html :: navbarMini">
+	</div>
+
+	<div class="grid-container-form">
+		<div class="grid-form">
+			<div class="flex title3">Registrazione avvenuta con successo!
+			</div>
+			<div class="">
+				<a class="button" href="login.html" th:href="@{/login}">Accedi</a>
+				<a class="button" href="home.html" th:href="@{/home}">Home</a>
+			</div>
+		</div>
+	</div>
+
+	<div th:insert="fragments/common.html :: footer">
+	</div>
+</body>
+</html>

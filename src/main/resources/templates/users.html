@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/common.html :: header(title='utenti')">
+</head>
+
+<body>
+	<div th:replace="fragments/common.html :: navbar">
+	</div>
+
+	<div class="grid-container-fit">
+		<div class="grid-fit" th:each="user: ${users}">
+			<div class="flex title">
+				<a href="user.html" th:href="@{'/user/'+${user.id}}" th:text="${user.nome}+' '+${user.cognome}">
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div th:insert="fragments/common.html :: footer">
+	</div>
+</body>
+
+</html>

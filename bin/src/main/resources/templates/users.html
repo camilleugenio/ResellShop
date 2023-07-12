@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/common.html :: header(title='Utenti')">
+</head>
+
+<body>
+	<div th:replace="fragments/common.html :: navbar">
+	</div>
+
+	<div class="grid-container-fit">
+		<div class="grid-fit" th:each="user: ${users}">
+			<div class="flex title">
+				<a href="user.html" th:href="@{'/user/'+${user.id}}" th:text="${user.nome}+' '+${user.cognome}">
+				</a>
+				<a href="luogo.html" th:href="@{'/luogo/'+${user.luogo.id}}" th:text="'('+${user.luogo.nome}+')'">
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div th:insert="fragments/common.html :: footer">
+	</div>
+</body>
+
+</html>

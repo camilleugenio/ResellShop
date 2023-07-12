@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/common.html :: header(title='prodotto')">
+</head>
+
+<body>
+	<div th:replace="fragments/common.html :: navbar">
+	</div>
+
+	<div class="flex-column center" th:if="${prodotto}">
+		<div class="product-container">
+			<div>
+				<div th:if="${prodotto.fotoImagePath}">
+					<img class="product-image-bigger" th:src="@{${prodotto.fotoImagePath}}" />
+				</div>
+				<div th:unless="${prodotto.fotoImagePath}">
+					<div class="product-image-bigger flex center">nessuna foto disponibile
+					</div>
+				</div>
+			</div>
+			<div class="product-info">
+				<div class="title" th:text="${prodotto.nome}">
+				</div>
+				<div class="title2" th:text="${prodotto.descrizione}">
+				</div>
+				<div class="title2">Venditore:
+					<a th:href="@{'/user/'+${prodotto.user.id}}" th:text="${prodotto.user.nome+' '+prodotto.user.cognome}">utente</a>
+				</div>
+				<div class="title2">Categoria:
+					<a th:href="@{'/categoria/'+${prodotto.categoria.id}}"
+						th:text="${prodotto.categoria.nome}">categoria</a>
+				</div>
+				<div th:if="(${prodotto.user.id}==${currentUserId}) OR (${#authorization.expression('hasAuthority(''ADMIN'')')})">
+					<div>
+						<a th:href="@{'/prodotto/edit/form/'+${prodotto.id}}">modifica</a>
+					</div>
+					<a th:href="@{'/prodotto/delete/confirm/'+${prodotto.id}}">cancella</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:unless="${prodotto}">
+		questo Prodotto non esiste!
+	</div>
+
+	<div th:insert="fragments/common.html :: footer">
+	</div>
+</body>
+
+</html>

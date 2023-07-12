@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/common.html :: header(title='logout')">
+</head>
+
+<body>
+	<div th:replace="fragments/common.html :: navbarMini">
+	</div>
+
+	<div class="grid-container-form">
+		<div class="grid-form">
+			<div class="flex title2">sei sicuro di voler uscire dal tuo account?
+			</div>
+			<div class="flex title3">
+				<a class="button" th:href="@{/logout}">conferma</a>
+				<a class="button" href="home.html" th:href="@{/home}">annulla</a>
+			</div>
+		</div>
+	</div>
+
+	<div th:insert="fragments/common.html :: footer">
+	</div>
+</body>
+
+</html>

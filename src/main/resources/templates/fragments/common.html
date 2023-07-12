@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="header(title)">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	<title th:text="${title}"></title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Sriracha&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" type="x-icon" href="images/logo.png"  />
+	<!--<link rel="icon" href="images/logo.png" type="image/x-icon">-->
+</head>
+
+<body>
+	<div th:fragment="navbar" class="navbar-container flex">
+		<a href="index.html" th:href="@{/}">
+		<div class="logo">
+			<a href="/"><img src="/images/logo.png" width="20%"/></a>
+		</div>
+	</a>
+		<nav>
+			<input type="checkbox" class="navbar-toggle-button" />
+			<div class="navbar-toggle-mobile">
+			</div>
+
+			<ul class="navbar-list flex">
+				<li>
+					<a href="home.html" th:href="@{/home}">HOME</a>
+				</li>
+				<li>
+					<a href="prodottos.html" th:href="@{/prodotto/all}">PRODOTTI</a>
+				</li>
+				<li>
+					<a href="categorias.html" th:href="@{/categoria/all}">CATEGORIE</a>
+				
+				<li sec:authorize="hasAuthority('ADMIN') OR hasAuthority('DEFAULT')">
+					<a href="user.html" th:href="@{/user/profile}">PROFILO</a>
+				</li>
+				<li sec:authorize="hasAuthority('ADMIN')">
+					<a href="users.html" th:href="@{/user/all}">UTENTI</a>
+				</li>
+				<li sec:authorize="not (hasAuthority('ADMIN') OR hasAuthority('DEFAULT'))">
+					<a href="askLogout.html" th:href="@{/login}">LOGIN</a>
+				</li>
+				<li sec:authorize="not (hasAuthority('ADMIN') OR hasAuthority('DEFAULT'))">
+					<a href="askLogout.html" th:href="@{/register}">REGISTER</a>
+				</li>
+				<li sec:authorize="hasAuthority('ADMIN') OR hasAuthority('DEFAULT')">
+					<a href="askLogout.html" th:href="@{/askLogout}">ESCI</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	
+	<!---navbarMini: versione piccola senza la lista-->
+	<div th:fragment="navbarMini" class="navbar-container flex">
+		<a href="index.html" th:href="@{/}">
+		<div class="logo">
+			<a href="/"><img src="/images/logo.png" width="20%"/></a>
+		</div>
+			<input type="checkbox" class="navbar-toggle-button" />
+			<div class="navbar-toggle-mobile">
+			</div>
+
+			<ul class="navbar-list flex">
+				<li>
+					<a href="home.html" th:href="@{/home}">HOME</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	
+	<!---footer: in basso a ogni pagina-->
+	<div class="footer-wrapper" th:fragment="footer">
+		<div class="foot">
+			<div> © 2023 | Studio Zero One | owned by: Camille Justine Gomez Eugenio</div>
+		</div>
+	</div>
+</body>
+
+</html>

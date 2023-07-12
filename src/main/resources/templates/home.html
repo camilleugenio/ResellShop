@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/common.html :: header(title='StudioZeroOne.')">
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div th:replace="fragments/common.html :: navbar">
+	</div>
+	
+	<h1>studio zero one.</h1>
+	
+	<div class="grid-pictures">
+		<img src="images/bp1.jpeg" alt="Picture 1">
+		<img src="images/bp2.jpg" alt="Picture 2">
+		<img src="images/bp3.jpg" alt="Picture 3">
+		<img src="images/bp4.png" alt="Picture 4">
+	</div>
+	
+	<h2>where style meets people. tuff! </h2>
+	
+
+	<div class="grid-container">
+		<div class="grid center">
+			<a class="grid-button" th:href="@{/prodotto/form}">
+			</a>
+			<div class="title3">aggiungi nuovo item.
+			</div>
+		</div>
+		<div class="grid center" th:each="prodotto: ${prodottos}">
+			<a class="grid-button" href="prodotto.html" th:href="@{'/prodotto/'+${prodotto.id}}">
+			</a>
+			<div th:if="${prodotto.fotoImagePath}">
+				<img class="product-image" th:src="@{${prodotto.fotoImagePath}}" />
+			</div>
+			<div th:unless="${prodotto.fotoImagePath}">
+				<div class="product-image flex center">nessuna foto disponibile.
+				</div>
+			</div>
+			<div class="title" th:text="${prodotto.nome}">
+			</div>
+			<div th:text="${prodotto.user.nome}">
+			</div>
+		</div>
+		<div class="grid center">
+			<a class="grid-button" th:href="@{/prodotto/all}">
+			</a>
+			<div class="title3">vedi tutti.
+			</div>
+		</div>
+	</div>
+
+	<div th:insert="fragments/common.html :: footer">
+	</div>
+</body>
+
+</html>

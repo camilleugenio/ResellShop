@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/common.html :: header(title='Luoghi')">
+</head>
+
+<body>
+	<div th:replace="fragments/common.html :: navbar">
+	</div>
+	
+	<div class="grid-container-fit">
+		<div class="grid-fit" sec:authorize="hasAuthority('ADMIN')">
+			<a class="title" th:href="@{/admin/luogo/form}">Inserisci un nuovo luogo</a>
+		</div>
+		<div class="grid-fit" th:each="luogo: ${luogos}">
+			<a class="title grid-fit-button" href="luogo.html" th:href="@{'/luogo/'+${luogo.id}}" th:text="${luogo.nome}">
+			</a>
+		</div>
+	</div>
+
+	<div th:insert="fragments/common.html :: footer">
+	</div>
+</body>
+
+</html>

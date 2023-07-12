@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/common.html :: header(title='Login')">
+</head>
+
+<body>
+	<div th:replace="fragments/common.html :: navbarMini">
+	</div>
+
+	<div class="grid-container-form">
+		<div class="grid-form">
+			<div class="flex title">Login Utente
+			</div>
+			<form th:action="@{/login}" method="POST">
+				<table>
+					<tr>
+						<td>Username:
+						</td>
+						<td><input name="username" type="text" required />
+						</td>
+					</tr>
+					<tr>
+						<td>Password:
+						</td>
+						<td><input name="password" type="password" required />
+						</td>
+					</tr>
+				</table>
+				<div>
+					<button class="button" type="submit">Login</button>
+				</div>
+				<div>
+					<span>Non hai un'account?</span>
+					<a class="button" href="registerUser.html" th:href="@{/register}">Registrati</a></p>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div th:insert="fragments/common.html :: footer">
+	</div>
+</body>
+</html>

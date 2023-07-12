@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/common.html :: header(title='categoria')">
+</head>
+
+<body>
+	<div th:replace="fragments/common.html :: navbar">
+	</div>
+
+	<div class="flex-column" th:if="${categoria}">
+		<div class="flex-column bg3">
+			<div class="flex">
+				<div class="title" th:text="${categoria.nome}">
+				</div>
+			</div>
+			<div class="description" th:text="${categoria.descrizione}">
+			</div>
+			<div sec:authorize="hasAuthority('ADMIN')">
+				<a th:href="@{'/admin/categoria/edit/form/'+${categoria.id}}">modifica</a>
+				<a th:href="@{'/admin/categoria/delete/confirm/'+${categoria.id}}"> | cancella</a>
+			</div>
+			
+			<div class="dropdown">
+				<div class="dropdown-content">
+					<div>
+						<a th:href="@{'/categoria/'+${categoria.id}}">tutti
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="attached-info">
+			<div class="flex title2">prodotti di questa categoria: </div>
+		</div>
+
+		<div class="grid-container" th:if="${prodottos}">
+			<div class="grid center" th:each="prodotto: ${prodottos}">
+				<a class="grid-button" href="prodotto.html" th:href="@{'/prodotto/'+${prodotto.id}}">
+				</a>
+				<div th:if="${prodotto.fotoImagePath}">
+					<img class="product-image" th:src="@{${prodotto.fotoImagePath}}" />
+				</div>
+				<div th:unless="${prodotto.fotoImagePath}">
+					<div class="product-image flex center">nessuna foto disponibile
+					</div>
+				</div>
+				<div class="title2" th:text="${prodotto.nome}">
+				</div>
+				<div th:text="${prodotto.user.nome}">
+				</div>
+			</div>
+		</div>
+		<div class="grid-container" th:unless="${prodottos}">
+			<div class="grid center" th:each="prodotto: ${categoria.prodottos}">
+				<a class="grid-button" href="prodotto.html" th:href="@{'/prodotto/'+${prodotto.id}}">
+				</a>
+				<div th:if="${prodotto.fotoImagePath}">
+					<img class="product-image" th:src="@{${prodotto.fotoImagePath}}" />
+				</div>
+				<div th:unless="${prodotto.fotoImagePath}">
+					<div class="product-image flex center">nessuna foto disponibile
+					</div>
+				</div>
+				<div class="title2" th:text="${prodotto.nome}">
+				</div>
+				<div th:text="${prodotto.user.nome}">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:unless="${categoria}">
+		questa Categoria non esiste!
+	</div>
+
+	<div th:insert="fragments/common.html :: footer">
+	</div>
+</body>
+
+</html>
